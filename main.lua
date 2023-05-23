@@ -66,10 +66,23 @@ function love.update(dt)
         if ball.y <= 0 then
             ball.y = 0
             ball.dy = - ball.dy * 1.03
+            ball.dx = ball.dx * 1.03
         end
         if ball.y >= V_HEIGHT - 4 then
             ball.y = V_HEIGHT - 4
             ball.dy = - ball.dy * 1.03
+            ball.dx = ball.dx * 1.03
+        end
+        if ball.x < -4 then
+            player2Score = player2Score + 1
+            ball:reset()
+            player1:reset()
+            player2:reset()
+        elseif ball.x > V_WIDTH+4 then
+            player1Score = player1Score + 1
+            ball:reset()
+            player1:reset()
+            player2:reset()
         end
     end
 
