@@ -64,6 +64,11 @@ function love.update(dt)
         end
     end
     if gameState == 'play' then
+        if ball.y < player2.y + player2.height / 2 then
+            player2.y = player2.y - 3
+        elseif ball.y > player2.y + player2.height / 2 then
+            player2.y = player2.y + 3
+        end
         if ball:collide(player1) then
             ball.dx = -ball.dx * 1.03
             ball.x = player1.x + 5
@@ -134,14 +139,14 @@ function love.update(dt)
         player1.dY = 0
     end
 
-    -- player 2 movement
-    if love.keyboard.isDown('up') then
-        player2.dY = -PADDLE_SPEED
-    elseif love.keyboard.isDown('down') then
-        player2.dY = PADDLE_SPEED
-    else
-        player2.dY = 0
-    end
+    -- -- player 2 movement
+    -- if love.keyboard.isDown('up') then
+    --     player2.dY = -PADDLE_SPEED
+    -- elseif love.keyboard.isDown('down') then
+    --     player2.dY = PADDLE_SPEED
+    -- else
+    --     player2.dY = 0
+    -- end
 
     if gameState == 'play' then
         ball:update(dt)
@@ -192,7 +197,7 @@ function love.draw()
         love.graphics.setFont(largeFont)
         love.graphics.printf('Player ' .. winnerPlayer .. " won!", 0, 10, V_WIDTH, 'center')
         love.graphics.setFont(smallFont)
-        love.graphics.printf('Press Enter to play again!', 0, 20, V_WIDTH, 'center')
+        love.graphics.printf('Press Enter to play again!', 0, 30, V_WIDTH, 'center')
         -- nothing to render
     end
 
